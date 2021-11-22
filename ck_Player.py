@@ -13,3 +13,5 @@ class Player:
         self.loc = None # what room is the player in?
         self.contents = {} # because we're also a container
     
+    
+    #please work 

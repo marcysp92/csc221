@@ -1,6 +1,7 @@
 # Item class
 
 class BaseItem:
+
     def __init__(self, name, description):
         self._name = name
         self._description = description
@@ -34,7 +35,7 @@ class BaseItem:
     
 class Item (BaseItem):
     
-     #super runs the equic function from the base class
+    #super runs the equiv function from the base class
     def __init__(self, name, description):
         super().__init__(name, description)
         
@@ -62,10 +63,20 @@ class UsableItem (Item):
         None.
 
         """
+    @property
+    def description(self):
+        """return a decorated description. 
+        Decoration = things like (too heavy to lift)
+        This example just polishes the object.""" 
+        desc = self._description
+        # decorate with extra info as needed
+        if self._wasUsed == True:
+            desc += " It's very shiny."
+        else:
+            desc += " It's pretty rusty."
+        return desc
         
-        
-        
-        
+
 
 # Test code
 """
@@ -74,17 +85,26 @@ List of items needed:
     R,Y,B key are provided in the corresponding rooms. 
     Combine two keys to access another in a locked room.
 """
+
+        
 def main():
-    key = Item("key", "It's a bit rusty.")
+    redKey = Item("Red Key", "Looks shinier than a ruby.")
     
-    sword = Item("sword", "It's very shiny.")
+    orgKey = Item("Orange Key", "Orange you glad I had the red and yellow key?")
     
-    bed = Item("Bed", "Looks soft.")
-    bed.canGet = False
+    ylwKey = Item("Yellow Key", "Its hue is as radiant as the sun.")
     
-    stuff = [key, sword, bed]
+    grnKey = Item("Green Key", "Guess things are greener on the other side.")
+    
+    bluKey = Item("Blue Key", "Looks cool and clear like the ocean.")
+    
+    purKey = Item("Purple Key", "It's more beautiful than red and blue combined.")
+    
+    
+    
+    stuff = [redKey, orgKey, ylwKey, grnKey, bluKey, purKey]
     for item in stuff:
         print(item.name, "-", item.description)
-        
+    #This works!! :D    
 if __name__ == "__main__":
     main()
