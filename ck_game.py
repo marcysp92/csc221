@@ -5,6 +5,8 @@
 
 from ck_rooms import Room
 from ck_Player import Player
+from ck_Items import Item
+from ck_Container import Container
 
 
 class Game():
@@ -84,9 +86,34 @@ class Game():
                      "A plush violet sofa is placed beside a vase of lilacs.",
                      { "west" : "Red Room",
                       "south" : "Blue Room"})
-        
+       
+       
+       #Keys for rooms
+       redKey = Item("Red Key", "Looks shinier than a ruby.")
+       
+       orgKey = Item("Orange Key", "Orange you glad I had the red and yellow key?")
+       
+       ylwKey = Item("Yellow Key", "Its hue is as radiant as the sun.")
+       
+    
+       grnKey = Item("Green Key", "Guess things are greener on the other side.")
+       
+       bluKey = Item("Blue Key", "Looks cool and clear like the ocean.")
+       
+       purKey = Item("Purple Key", "It's more beautiful than red and blue combined.")
+       
         # Place rooms in a dictionary.
         # (Game will handle this in the full version)
+        
+       #Linking items
+       redRoom.addItem(redKey)
+       orgRoom.addItem(orgKey)
+       ylwRoom.addItem(ylwKey)
+       grnRoom.addItem(grnKey)
+       bluRoom.addItem(bluKey)
+       purRoom.addItem(purKey)
+       
+       
        self.rooms = { 
                 mainRoom.name: mainRoom,
                 redRoom.name: redRoom,
@@ -98,21 +125,30 @@ class Game():
         
        #Rooms finally work
        
+       #Need to specify locked/unlocked rooms.
+       
+       
+        
+       
        self.here = mainRoom # starting location
        
+       return self.rooms 
+   
+    
     def loop(self):
         """ loop(): the main game loop.
         Continues until the user quits. """
         self.isPlaying = True
         while self.isPlaying:
             self.playerAction()
-        print("Game over, thanks for playing")
+        print("Game over, thanks for playing!")
         
 
 
     def end(self):
         """ finish game, inform user of score and turns played. """
         pass
+    
     
     def playerAction(self):
         """ Ask user for input, validate it, update the game state. """
@@ -138,6 +174,11 @@ class Game():
         elif verb == "drop":
             item = words[1]
             self.commandDrop(item)
+        elif verb == "check":
+            self.commandCheckInv()
+        elif verb == "use":
+            item = words[1]
+            self.commandUse(item)
         
         else: # first word is verb
             print("I don't know how to", words[0])
@@ -163,12 +204,25 @@ class Game():
         """ remove the item from the room (if it's there)
         and place it in player inventory.
         """
-        # TODO: actually do this
-        # We'll need to remove the item from the current
-        # room, and then add it to the player inventory
-        # (which means we need a player inventory)
-        print("You try to get the", itemName)
-
+        #WHY WON"T THIS WORK?!! >:(
+        #maybe have only one variable serving as the key to each room.
+        #Ex. "Get key" triggers the Get and Drop function
+        # lookup to fix the names - turn "red" into "Red Key" for example
+        
+        if itemName == "red":
+            itemName = "Red Key"
+        elif itemName == "blue":
+            itemName = "Blue Key"
+        elif itemName == "yellow":
+            itemName = "Yellow Key"
+        elif itemName == "green":
+            itemName = "Green Key"
+        elif itemName == "orange":
+            itemName = "Orange Key"
+        elif itemName == "purple":
+            itemName = "Purple Key"
+        # end fixing names
+        print("You try to get the", itemName,".")
         
         if self.here.contains(itemName):
             item = self.here.contents[itemName]
@@ -177,11 +231,23 @@ class Game():
         else:
             print("You can't see any", itemName, "here.")
         
-        
     def commandDrop(self, itemName):
         """ remove the item from player inventory
         (if it's there) and add it to the room. 
         """
+        if itemName == "red":
+            itemName = "Red Key"
+        elif itemName == "blue":
+            itemName = "Blue Key"
+        elif itemName == "yellow":
+            itemName = "Yellow Key"
+        elif itemName == "green":
+            itemName = "Green Key"
+        elif itemName == "orange":
+            itemName = "Orange Key"
+        elif itemName == "purple":
+            itemName = "Purple Key"
+        
         print("You try to drop the", itemName)
         
         if self.player.contains(itemName):
@@ -191,22 +257,34 @@ class Game():
         else:
             print("You don't have a", itemName, "to drop!")
 
+    def commandCheckInv(self):
+        itemNames = self.player.contents.keys()
+        for itemName in itemNames:
+            print(itemName)
+    
+    def commandUse(self, itemName):
+        if self.player.contains(itemName):
+            item = self.player.contents[itemName]
+            self.here.moveItemTo(item, self.player)
+            self.player.use(item, self.here)
+            print("You used the", itemName,".")
+        else:
+            print("You can't use the", itemName, ".")
 
     # Helper functions -- not necessary, but useful
     @property
     def here(self):
-        return self.player.loc
+        return self.player._loc
     
     @here.setter
     def here(self, room):
-        self.player.loc = room
+        self.player._loc = room
 
 
 def main():
     game = Game()
-    
     game.setup()
-    print("Starting game -- enter command.")
+    print("Welcome to the Color Key game! -- enter command.")
     game.loop()
     game.end()
 

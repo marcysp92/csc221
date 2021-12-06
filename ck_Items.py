@@ -42,27 +42,23 @@ class Item (BaseItem):
         
 class UsableItem (Item):
     """
-    
+    Works like a regular item, except that
+    it has one or more usable verbs
+    that will cause it to make changes.
     """
     def __init__(self, name, description):
         super().__init__(name, description)
         self._wasUsed = False
         
     def use(self, useVerb = "use"):
-        """
-        use() - call to make objec change to its other state.
-        TODO: this needs more though
         
-        Parameters
-        ----------
-        useVerb : TYPE, optional
-            DESCRIPTION. The default is "use".
-
-        Returns
-        -------
-        None.
-
-        """
+        if self._wasUsed == True:
+            print("You already used this item.")
+        else:
+            print("You attempt to",useVerb,"the item.")
+            self._wasUsed = True
+            
+            
     @property
     def description(self):
         """return a decorated description. 
@@ -71,9 +67,9 @@ class UsableItem (Item):
         desc = self._description
         # decorate with extra info as needed
         if self._wasUsed == True:
-            desc += " It's very shiny."
+            desc += " Item was used."
         else:
-            desc += " It's pretty rusty."
+            desc += " Item was not used."
         return desc
         
 
@@ -86,11 +82,11 @@ List of items needed:
     Combine two keys to access another in a locked room.
 """
 
-        
 def main():
     redKey = Item("Red Key", "Looks shinier than a ruby.")
     
     orgKey = Item("Orange Key", "Orange you glad I had the red and yellow key?")
+
     
     ylwKey = Item("Yellow Key", "Its hue is as radiant as the sun.")
     
@@ -100,11 +96,15 @@ def main():
     
     purKey = Item("Purple Key", "It's more beautiful than red and blue combined.")
     
-    
-    
     stuff = [redKey, orgKey, ylwKey, grnKey, bluKey, purKey]
     for item in stuff:
         print(item.name, "-", item.description)
     #This works!! :D    
+    
+    #redKey = UsableItem("Red Key", "Looks shinier than a ruby.")
+    
+    #redKey.use()
+    #for item in stuff:
+       #print(item.name, "-", item.description)
 if __name__ == "__main__":
     main()

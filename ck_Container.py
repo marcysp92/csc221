@@ -7,6 +7,7 @@
 
 from ck_Items import Item
 
+
 class Container(Item):
     """ This class only handles collections of Items. """
     
@@ -27,35 +28,31 @@ class Container(Item):
         self.remove(item)
         
     def listContents(self):
+
         text = ""
         for key in self.contents:
             text += key 
-            text += " : " 
+            text += " - " 
             text += self.contents[key].description
             text += "\n"
         return text
-    """
-    This function is busted. I have an unholy mix
-    of item name and the item itself, and it's broken
-    """       
+        
+    #itemName keyword is here ******
     def contains(self, itemName):
         """ quick way to check if item is present. """
         # keys() gives us a list of names of items present
         itemNameList = list(self.contents.keys())
-        #print(itemNameList)
+        print(itemNameList)
         if itemName in itemNameList:
             return True
         else:
             return False
 
- 
-        
-def main():
-     """ test code"""
-     
-     
- 
     
  
+       
+def main():
+     """ test code"""
+     pass
 if __name__ == "__main__":
     main()
