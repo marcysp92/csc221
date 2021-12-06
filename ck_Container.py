@@ -42,7 +42,7 @@ class Container(Item):
         """ quick way to check if item is present. """
         # keys() gives us a list of names of items present
         itemNameList = list(self.contents.keys())
-        print(itemNameList)
+        #print(itemNameList)
         if itemName in itemNameList:
             return True
         else:
