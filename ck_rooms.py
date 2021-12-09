@@ -67,14 +67,13 @@ class Room(Container):
         
     def lock(self):
         if self.locked == True:
-            
             print("The room is locked. Looks like it needs two keys to open.")
     
     def unlock(self):
         pass
         if self.locked == False:
             print("The room is unlocked. Let's go inside!")
-    
+  
     
 def main():
     #Linking items to Rooms
@@ -145,6 +144,7 @@ def main():
     purRoom.addItem(purKey)
 
 
+
     roomDict = { mainRoom.name: mainRoom,   
                  redRoom.name: redRoom,
                  orgRoom.name: orgRoom,
@@ -162,91 +162,5 @@ def main():
     loc.describe()
     
 
-
-
-
-
-#ALL USED FOR TESTING. UNCOMMENTED WILL BREAK CODE!!!
-#VVVVVVVVV
-# =============================================================================
-# #used for testing
-# def main():
-# 
-#     mainRoom = Room("You wake up in a dark room. Before you is a large door with six key holes. Maybe it's a way out.",
-#                        {"north":"Red Room",
-#                         "south":"Green Room",
-#                         "east":"Blue Room",
-#                         "west":"Yellow Room"}) 
-#        
-#     redRoom = Room( "Red Room", 
-#                    "Crismon roses sprout out of cracks in the walls.",
-#                        {"south":"Main Room",
-#                         "east":"Purple Room",
-#                         "west":"Orange"})
-#        
-#     orgRoom = Room( "Orange Room", 
-#                    "An essence of citrus fills the air.",
-#                        {"south":"Yellow Room",
-#                         "east":"Red Room"})
-#         
-#     ylwRoom = Room ( "Yellow Room",
-#                            "There's a bowl of bananas on the table.",
-#                            {"south":"Main Room",
-#                             "east":"Purple Room",
-#                             "west":"Orange"})
-#        
-#     grnRoom = Room( "Green Room", 
-#                    "You gag at the smell of pungency as you trod through the slime-coated floors.",{"north":"Main"})
-#         
-#     bluRoom = Room ( "Blue Room", 
-#                          "The windows show the clear skies.",
-#                          { "north" : "Purple",
-#                           "west" : "Main Room"})
-#         
-#     purRoom = Room ( "Purple Room", 
-#                      "Asatin violet love seat is placed beside a vase of lilacs.",
-#                      { "west" : "Red Room",
-#                       "south" : "Blue Room"})
-#     
-#     # Place rooms in a dictionary.
-#     # (Game will handle this in the full version)
-#     roomDict = { mainRoom.name: mainRoom,
-#                 redRoom.name: redRoom,
-#                 orgRoom.name: orgRoom,
-#                 ylwRoom.name: ylwRoom,
-#                 grnRoom.name: grnRoom,
-#                 bluRoom.name: bluRoom,
-#                 purRoom.name: purRoom}
-#     
-#     
-#     
-#     # Test out items
-#     key = Item("key", "It's a bit rusty.")
-#     sword = Item("sword", "It's very shiny.")
-#     mainRoom.addItem(key)
-#     redRoom.addItem(sword)
-#     #print(loc.contents) # just dump the list
-#     
-#     
-#     # Test out movement
-#     loc = mainRoom
-#     print("Starting room:")
-#     loc.describe()
-#     
-#     print ("Heading South...")
-#     loc = roomDict[loc.exits["south"]] # find room to South, go there
-#     loc.describe()
-#     
-#     print ("Heading East...")
-#     loc = roomDict[loc.exits["east"]] # find room to North, go there
-#     loc.describe()
-#     
-#     print ("Heading North...")
-#     print("To the north is the red room again. You're in a loop.")
-# 
-#  
-#     if __name__ == "__main__":
-#   main()   
-# =============================================================================
     if __name__ == "__main__":
         main()   

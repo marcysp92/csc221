@@ -6,7 +6,7 @@
 from ck_rooms import Room
 from ck_Player import Player
 from ck_Items import Item
-from ck_Container import Container
+
 
 
 class Game():
@@ -112,6 +112,9 @@ class Game():
        grnRoom.addItem(grnKey)
        bluRoom.addItem(bluKey)
        purRoom.addItem(purKey)
+       
+       
+       #Specifying locked/unlocked rooms
        
        
        self.rooms = { 
@@ -258,6 +261,8 @@ class Game():
             print("You don't have a", itemName, "to drop!")
 
     def commandCheckInv(self):
+        print("INVENTORY")
+        print("---------")
         itemNames = self.player.contents.keys()
         for itemName in itemNames:
             print(itemName)
@@ -270,6 +275,8 @@ class Game():
             print("You used the", itemName,".")
         else:
             print("You can't use the", itemName, ".")
+            
+        #Add functionality to usable item
 
     # Helper functions -- not necessary, but useful
     @property
